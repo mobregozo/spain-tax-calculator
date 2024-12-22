@@ -19,11 +19,14 @@ interface DeductionEditorProps {
   onUpdate: (deductions: DeductionItem[]) => void;
 }
 
-export function DeductionEditor({ deductions, onUpdate }: DeductionEditorProps) {
+export function DeductionEditor({
+  deductions,
+  onUpdate,
+}: DeductionEditorProps) {
   const [newDeduction, setNewDeduction] = useState({
     name: "",
     amount: "",
-    type: "fixed" as const,
+    type: "fixed" as "fixed" | "percentage",
   });
 
   const handleAdd = () => {
@@ -47,7 +50,9 @@ export function DeductionEditor({ deductions, onUpdate }: DeductionEditorProps) 
   const handleUpdate = (id: string, field: string, value: string | number) => {
     onUpdate(
       deductions.map((d) =>
-        d.id === id ? { ...d, [field]: field === "amount" ? Number(value) : value } : d
+        d.id === id
+          ? { ...d, [field]: field === "amount" ? Number(value) : value }
+          : d
       )
     );
   };
@@ -59,7 +64,9 @@ export function DeductionEditor({ deductions, onUpdate }: DeductionEditorProps) 
           <div key={deduction.id} className="flex items-center gap-2">
             <Input
               value={deduction.name}
-              onChange={(e) => handleUpdate(deduction.id, "name", e.target.value)}
+              onChange={(e) =>
+                handleUpdate(deduction.id, "name", e.target.value)
+              }
               placeholder="Name"
               className="flex-1"
               disabled={!deduction.isCustom}
@@ -67,15 +74,21 @@ export function DeductionEditor({ deductions, onUpdate }: DeductionEditorProps) 
             <Input
               type="number"
               value={deduction.amount}
-              onChange={(e) => handleUpdate(deduction.id, "amount", e.target.value)}
+              onChange={(e) =>
+                handleUpdate(deduction.id, "amount", e.target.value)
+              }
               placeholder="Amount"
               className="w-32"
               disabled={!deduction.isCustom}
             />
             <Select
               value={deduction.type}
-              onValueChange={(value) => 
-                handleUpdate(deduction.id, "type", value as 'fixed' | 'percentage')
+              onValueChange={(value) =>
+                handleUpdate(
+                  deduction.id,
+                  "type",
+                  value as "fixed" | "percentage"
+                )
               }
               disabled={!deduction.isCustom}
             >
@@ -128,7 +141,10 @@ export function DeductionEditor({ deductions, onUpdate }: DeductionEditorProps) 
           <Select
             value={newDeduction.type}
             onValueChange={(value) =>
-              setNewDeduction({ ...newDeduction, type: value as 'fixed' | 'percentage' })
+              setNewDeduction({
+                ...newDeduction,
+                type: value as "fixed" | "percentage",
+              })
             }
           >
             <SelectTrigger className="w-32">

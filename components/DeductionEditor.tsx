@@ -23,7 +23,7 @@ export function DeductionEditor({ deductions, onUpdate }: DeductionEditorProps) 
   const [newDeduction, setNewDeduction] = useState({
     name: "",
     amount: "",
-    type: "fixed" as const,
+    type: "fixed" as "fixed" | "percentage",
   });
 
   const handleAdd = () => {

@@ -49,7 +49,7 @@ export function ComparisonChart({ employeeData, selfEmployedData }: ComparisonCh
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
-              <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+              <Tooltip formatter={(value) => `€${Number(value).toFixed(2)}`} />
               <Legend />
               <Bar dataKey="Employee" fill="hsl(var(--chart-1))" />
               <Bar dataKey="Self-Employed" fill="hsl(var(--chart-2))" />

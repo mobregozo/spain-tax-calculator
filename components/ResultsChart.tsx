@@ -26,9 +26,9 @@ export function ResultsChart({ employeeData, selfEmployedData }: any) {
     },
     {
       name: "Total Deductions",
-      Employee: Object.values(employeeData.deductions).reduce((a: number, b: number) => a + b, 0),
+      Employee: Object.values(employeeData.deductions).reduce((a: number, b) => a + Number(b), 0),
       "Self-Employed": Object.values(selfEmployedData.deductions).reduce(
-        (a: number, b: number) => a + b,
+        (a: number, b) => a + Number(b),
         0
       ),
     },
@@ -46,7 +46,7 @@ export function ResultsChart({ employeeData, selfEmployedData }: any) {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
-              <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+              <Tooltip formatter={(value) => `€${Number(value).toFixed(2)}`} />
               <Legend />
               <Bar dataKey="Employee" fill="hsl(var(--chart-1))" />
               <Bar dataKey="Self-Employed" fill="hsl(var(--chart-2))" />
